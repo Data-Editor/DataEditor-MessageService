@@ -1,0 +1,24 @@
+language: java
+
+jdk:
+  - oraclejdk11
+
+env:
+  - MAVEN_VERSION=4.0.0
+
+services:
+  - docker
+
+addons:
+  sonarcloud:
+    organization: niek125
+
+install:
+  - "mvn -N io.takari:maven:wrapper -Dmaven=${MAVEN_VERSION}"
+
+script:
+  - mvn clean install sonar:sonar -Pcoverage -Dsonar.projectKey=Niek125_DataEditorMessageService
+
+after_success:
+  - mvn clean install sonar:sonar -Pcoverage -Dsonar.projectKey=Niek125_DataEditorMessageService
+  - docker push docker.io/$DOCKER_NAME/dogadoption-rest:latest
