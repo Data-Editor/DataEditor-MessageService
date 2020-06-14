@@ -18,8 +18,8 @@ install:
 
 script:
   - mvn clean install sonar:sonar -Pcoverage -Dsonar.projectKey=Niek125_DataEditorMessageService
-  - docker build -t docker.io/$DOCKER_NAME/DataEditor-MessageService:latest .
+  - docker build -t docker.io/$DOCKER_NAME/dataeditormessageservice:latest .
 
 after_success:
   - docker login -u $DOCKER_NAME -p $DOCKER_PASSWORD
-  - docker push docker.io/$DOCKER_NAME/DataEditor-MessageService:latest
+  - docker push docker.io/$DOCKER_NAME/dataeditormessageservice:latest
