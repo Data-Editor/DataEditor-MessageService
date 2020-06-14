@@ -18,7 +18,8 @@ install:
 
 script:
   - mvn clean install sonar:sonar -Pcoverage -Dsonar.projectKey=Niek125_DataEditorMessageService
+  - docker build -t docker.io/$DOCKER_NAME/DataEditor-MessageService:latest .
 
 after_success:
-  - mvn clean install sonar:sonar -Pcoverage -Dsonar.projectKey=Niek125_DataEditorMessageService
-  - docker push docker.io/$DOCKER_NAME/dogadoption-rest:latest
+  - docker login -u $DOCKER_NAME -p $DOCKER_PASSWORD
+  - docker push docker.io/$DOCKER_NAME/DataEditor-MessageService:latest
